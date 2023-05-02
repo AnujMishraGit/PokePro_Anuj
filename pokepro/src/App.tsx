@@ -4,6 +4,7 @@ import { Suspense, lazy,useEffect } from "react";
 import Loader from "./components/Loader/Loader";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
+import InputBar from "./components/InputBar/InputBar.jsx"
 import "./App.css";
 const Search = lazy(()=> import('./Pages/Search/Search'));
 const Pokemon = lazy(()=>import("./Pages/Pokemon/Pokemon"))
@@ -16,6 +17,7 @@ function App() {
       <BrowserRouter>
       <Suspense fallback={<Loader/>}>
         <div className="app">
+          <InputBar/>
           <Routes>
             <Route element={<Search/>} path="/search"/>
             <Route element={<Pokemon/>} path="/pokemon/:id>"/>

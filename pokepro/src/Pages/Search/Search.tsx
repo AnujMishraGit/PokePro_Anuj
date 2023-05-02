@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./search.css";
 import Card from "../../components/Card/Card";
+
 interface Pokemon {
   name: string;
   url: string;
@@ -18,7 +19,9 @@ interface PokemonDetails {
 interface PokemonColorDetails{
   id: number;
   name:string;
-  color:string;
+  color:{
+    name:string;
+  }
 }
 
 const Search = () => {
@@ -41,7 +44,7 @@ const Search = () => {
       const images: string[] = [];
       for (const pokemon of pokemonData) {
         const response = await axios.get<PokemonDetails>(pokemon.url);
-        // console.log("response from fetch images "+response);
+        console.log(response);
         const image = response.data.sprites.front_default;
         images.push(image);
       }
@@ -54,10 +57,10 @@ const Search = () => {
         let part : string[] = pokemon.url.split("/");
         let index: string = (part[part.length -2]);
         try{
-          const response = await axios.get<PokemonColorDetails>(`https://pokeapi.co/api/v2/pokemon-color/${index}`);
-          const color = response.data.name;
-
-          colors.push(color);
+          const response = await axios.get<PokemonColorDetails>(`https://pokeapi.co/api/v2/pokemon-species/${index}`);
+          // const color = response.data.name;
+          // console.log(response.data.color.name)
+          colors.push(response.data.color.name);
         }catch{
           colors.push("white")
 
@@ -65,16 +68,17 @@ const Search = () => {
         
       }
       console.log(colors);
-      // setPokemonsColors(colors);
+      setPokemonsColors(colors);
     };
     fetchColors();
   }, [pokemonData]);
 
   return (
     <div className="card-container">
+       
       {pokemonData.map((pokemon, index) => (
         <div key={index} className="card">
-          <Card name={pokemon.name} imgURL={pokemonImages[index]} prominentColor={undefined} ablity={undefined}/>
+          <Card name={pokemon.name} imgURL={pokemonImages[index]} prominentColor={pokemonColors[index]} ability={undefined}/>
         </div>
       ))}
     </div>
