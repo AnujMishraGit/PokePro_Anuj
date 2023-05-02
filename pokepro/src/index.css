@@ -10,12 +10,24 @@
   color-scheme: light dark;
   color: rgba(246, 245, 245, 0.87);
   background: hsla(252, 22%, 48%, 1);
- overflow-y: hidden;
-background: linear-gradient(90deg, hsla(252, 22%, 48%, 1) 0%, rgb(137, 140, 171) 100%);
+  overflow-y: hidden;
+  background: linear-gradient(
+    90deg,
+    hsla(252, 22%, 48%, 1) 0%,
+    rgb(137, 140, 171) 100%
+  );
 
-background: -moz-linear-gradient(90deg, hsla(252, 22%, 48%, 1) 0%, rgb(142, 147, 203) 100%);
+  background: -moz-linear-gradient(
+    90deg,
+    hsla(252, 22%, 48%, 1) 0%,
+    rgb(142, 147, 203) 100%
+  );
 
-background: -webkit-linear-gradient(90deg, hsla(252, 22%, 48%, 1) 0%, rgb(80, 82, 106) 100%);
+  background: -webkit-linear-gradient(
+    90deg,
+    hsla(252, 22%, 48%, 1) 0%,
+    rgb(80, 82, 106) 100%
+  );
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -23,8 +35,7 @@ background: -webkit-linear-gradient(90deg, hsla(252, 22%, 48%, 1) 0%, rgb(80, 82
   -webkit-text-size-adjust: 100%;
 }
 
-*{
-  margin:0;
-  padding:0;
-  
+* {
+  margin: 0;
+  padding: 0;
 }
