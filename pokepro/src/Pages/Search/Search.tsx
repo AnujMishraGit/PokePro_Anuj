@@ -1,91 +1,44 @@
+import { useEffect } from "react";
 
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useAppDispatch, useAppSelector } from "../../app/hook";
 import "./search.css";
-import Card from "../../components/Card/Card";
-
-interface Pokemon {
-  name: string;
-  url: string;
-}
-
-interface PokemonSprite {
-  front_default: string;
-}
-
-interface PokemonDetails {
-  sprites: PokemonSprite;
-}
-interface PokemonColorDetails{
-  id: number;
-  name:string;
-  color:{
-    name:string;
-  }
-}
+import PokemonCard from "../../components/Card/PokemonCard";
+import { getInitialPokemonData } from "../../app/getInitialData";
+import { getPokemonsData } from "../../app/getPokemonData";
 
 const Search = () => {
-  const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
-  const [pokemonImages, setPokemonImages] = useState<string[]>([]);
-  const [pokemonColors, setPokemonsColors]= useState<string[]>([]);
-
+  const dispatch = useAppDispatch();
+  // data fetching from api and storing it to the store
+  const { allPokemon, randomPokemon } = useAppSelector(
+    ({ pokemon }) => pokemon
+  );
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("https://pokeapi.co/api/v2/pokemon");
-      const data = response.data.results;
-      // console.log( response)
-      setPokemonData(data);
-    };
-    fetchData();
-  }, []);
-
+    dispatch(getInitialPokemonData());
+  }, [dispatch]);
   useEffect(() => {
-    const fetchImages = async () => {
-      const images: string[] = [];
-      for (const pokemon of pokemonData) {
-        const response = await axios.get<PokemonDetails>(pokemon.url);
-        console.log(response);
-        const image = response.data.sprites.front_default;
-        images.push(image);
-      }
-      setPokemonImages(images);
-    };
-    fetchImages();
-    const fetchColors = async () => {
-      const colors: string[] = [];
-      for (const pokemon of pokemonData) {
-        let part : string[] = pokemon.url.split("/");
-        let index: string = (part[part.length -2]);
-        try{
-          const response = await axios.get<PokemonColorDetails>(`https://pokeapi.co/api/v2/pokemon-species/${index}`);
-          // const color = response.data.name;
-          // console.log(response.data.color.name)
-          colors.push(response.data.color.name);
-        }catch{
-          colors.push("white")
-
-        }
-        
-      }
-      console.log(colors);
-      setPokemonsColors(colors);
-    };
-    fetchColors();
-  }, [pokemonData]);
+    if (allPokemon) {
+      const clonedPokemon = [...allPokemon];
+      const randomPokemons = clonedPokemon
+        .sort(() => Math.random() - Math.random())
+        .slice(0, 20);
+      dispatch(getPokemonsData(randomPokemons));
+    }
+  }, [allPokemon, dispatch]);
 
   return (
-    <div className="card-container">
-       
-      {pokemonData.map((pokemon, index) => (
-        <div key={index} className="card">
-          <Card name={pokemon.name} imgURL={pokemonImages[index]} prominentColor={pokemonColors[index]} ability={undefined}/>
-        </div>
+    <div className=" flex flex-wrap">
+      {randomPokemon?.map((pokemon) => (
+        <PokemonCard
+          key={pokemon.id}
+          name={pokemon.name}
+          imgURL={pokemon.image}
+          type={pokemon.type}
+          id={pokemon.id}
+          baseColor={pokemon.baseColor}
+        />
       ))}
     </div>
   );
 };
 
-
-
-
-export default Search
+export default Search;
