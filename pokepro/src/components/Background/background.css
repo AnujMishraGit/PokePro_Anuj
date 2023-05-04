@@ -1,0 +1,16 @@
+/* .background{
+    z-index: -1;
+    position:absolute;
+    max-height: 100vh;
+    display:grid;
+    grid-template-rows:2fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1.5rem; 
+    flex-wrap: wrap;
+    
+} */
+/* .background img{
+    max-inline-size: 100%;
+    block-size: auto;
+    height:20rem;
+} */
