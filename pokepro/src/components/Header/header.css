@@ -1,0 +1,24 @@
+header{
+    /* background-color: #6A5F94; */
+    margin-bottom: 20px;
+}
+
+.header__container{
+    display:flex;
+    justify-content: space-between;
+    height: 10vh;
+    width: 100vw;
+
+}
+.header__logo{
+    width: 150px;
+  
+    cursor: pointer;
+    
+    
+}
+.header__title{
+    font-weight:bolder;
+    font-size:5em;
+    cursor: pointer;
+}
