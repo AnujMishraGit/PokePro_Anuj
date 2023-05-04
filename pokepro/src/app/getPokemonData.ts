@@ -12,11 +12,11 @@ export const getPokemonsData = createAsyncThunk(
       
       for await (const pokemon of pokemons) {
         const { data } = await axios.get(pokemon.url);
-        console.log(data);
+        // console.log(data);
         let color;
         if(data){
           const speciesData = await axios.get(data.species.url);
-          console.log("species", speciesData.data.color.name);
+          // console.log("species", speciesData.data.color.name);
           let baseColor = speciesData?.data?.color?.name;
           color = colorConverter(baseColor, 0.25);
         }
