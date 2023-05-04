@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import "./search.css";
 import PokemonCard from "../../components/Card/PokemonCard";
@@ -9,6 +8,7 @@ import { getPokemonsData } from "../../app/getPokemonData";
 const Search = () => {
   const dispatch = useAppDispatch();
   // data fetching from api and storing it to the store
+
   const { allPokemon, randomPokemon } = useAppSelector(
     ({ pokemon }) => pokemon
   );
@@ -27,15 +27,18 @@ const Search = () => {
 
   return (
     <div className=" flex flex-wrap">
-      {randomPokemon?.map((pokemon) => (
+      {randomPokemon?.map((pokemon, idx) => (
+        
+
         <PokemonCard
-          key={pokemon.id}
           name={pokemon.name}
           imgURL={pokemon.image}
           type={pokemon.type}
           id={pokemon.id}
           baseColor={pokemon.baseColor}
+          key={idx}
         />
+        
       ))}
     </div>
   );

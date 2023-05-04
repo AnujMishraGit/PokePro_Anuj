@@ -1,6 +1,7 @@
 export interface PokemonTypeInitialState {
     allPokemon: undefined | PokemonType[];
     randomPokemon: undefined | allPokemonDataType[];
+    currentPokemon: undefined | individualPokemonDataType[];
 };
 
 export interface PokemonType {
@@ -21,5 +22,17 @@ export interface allPokemonDataType {
     id: number;
     image: string;
     type: PokiType;
-    baseColor:string;
+    baseColor: string;
+}
+export interface individualPokemonDataType {
+    name: string,
+    id: number,
+    image: string,
+    type: string[],
+    baseColor: string,
+    base_happiness: number,
+    capture_rate: number,
+    growth_rate: string,
+    habitat: string
+
 }
