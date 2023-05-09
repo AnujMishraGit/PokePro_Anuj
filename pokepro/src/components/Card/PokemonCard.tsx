@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { PokiType } from "../../utils/Types";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 type cardProps = {
   id: number;
@@ -38,7 +40,7 @@ function PokemonCard({
         className="object-contain items-center rounded-md backdrop:blur-sm w-3/4 justify-center flex h-3/4"
         style={{ backgroundColor: baseColor }}
       >
-        <img src={imgURL} alt={name} />
+        <LazyLoadImage src={imgURL} alt={name} effect="blur" />
       </div>
       <div className=" flex  align-top justify-around w-full flex-col text-center">
         <div className=" text-2xl text-black  flex justify-evenly align-text-bottom">

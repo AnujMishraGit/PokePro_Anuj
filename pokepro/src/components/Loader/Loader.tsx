@@ -1,11 +1,11 @@
-import React from 'react'
-
+import React from "react";
+import pokeballLoader from "../../assets/assets/pokeball-loader.gif";
 function Loader() {
   return (
-    <div>
-      I am the loader
+    <div className="loader">
+      <img src={pokeballLoader} alt="" />
     </div>
-  )
+  );
 }
 
-export default Loader
+export default Loader;

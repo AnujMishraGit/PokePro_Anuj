@@ -4,6 +4,7 @@ import "./search.css";
 import PokemonCard from "../../components/Card/PokemonCard";
 import { getInitialPokemonData } from "../../app/getInitialData";
 import { getPokemonsData } from "../../app/getPokemonData";
+import InputBar from "../../components/InputBar/InputBar";
 
 const Search = () => {
   const dispatch = useAppDispatch();
@@ -27,9 +28,11 @@ const Search = () => {
 
   return (
     <div className=" flex flex-wrap">
+      
+      <InputBar/>
+      <div className=" flex flex-wrap">
       {randomPokemon?.map((pokemon, idx) => (
         
-
         <PokemonCard
           name={pokemon.name}
           imgURL={pokemon.image}
@@ -40,6 +43,7 @@ const Search = () => {
         />
         
       ))}
+      </div>
     </div>
   );
 };

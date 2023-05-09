@@ -1,11 +1,13 @@
 // @ts-nocheck
-
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { getCurrentPokemonData } from "../../app/getCurrentPokemonData";
 import axios from "axios";
+import DetailsNavBar from "../../components/DetailsNavBar/DetailsNavBar";
 
 function Pokemon() {
   const params = useParams();
@@ -25,11 +27,16 @@ function Pokemon() {
           setPokemonFormsData({
             flavor_text: res.data?.flavor_text_entries[3]?.flavor_text,
           });
-          console.log(res.data?.flavor_text_entries[3]?.flavor_text);
-        }).catch((err)=> console.log(err));
+        })
+        .catch((err) => console.log(err));
     }
-  }, [ currentPokemon?.id]);
-  console.log(params.id);
+    return () => {
+      setPokemonFormsData({
+        flavor_text: "",
+      });
+    };
+  }, [currentPokemon?.id]);
+
   // console.log(currentPokemon?.baseColor);
 
   return (
@@ -47,8 +54,11 @@ function Pokemon() {
                 </div>
               </div>
               <div className="w-1/2 h-full text-red-400 flex flex-col pl-12 pt-6 justify-between">
-                {currentPokemon.type.map((item) => (
-                  <div className=" w-fit bg-green-200 capitalize rounded-md pl-4 pr-4  ">
+                {currentPokemon.type.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className=" w-fit bg-green-200 capitalize rounded-md pl-4 pr-4  "
+                  >
                     {item}
                   </div>
                 ))}
@@ -58,28 +68,18 @@ function Pokemon() {
               className=" h-full rounded-3xl m-10 p-10 flex justify-center items-center "
               style={{ backgroundColor: currentPokemon.baseColor }}
             >
-              <img src={currentPokemon.image} alt={currentPokemon.id} />
+              <LazyLoadImage
+                src={currentPokemon.image}
+                alt={currentPokemon.id}
+                effect="blur"
+              />
             </div>
           </div>
           <div className=" w-1/2 h-full bg-slate-200 flex flex-col justify-items-center align-middle ">
             <div className=" h-1/5  flex justify-around align-middle font-bold text-center m-10 text-gray-400">
-              <div className="hover:text-l hover:text-blue-400 cursor-pointer active:text-blue-500">
-                Form
-              </div>
-              <div className="hover:text-l hover:text-blue-400 cursor-pointer">
-                Details
-              </div>
-              <div className="hover:text-l hover:text-blue-400 cursor-pointer">
-                Types
-              </div>
-              <div className="hover:text-l hover:text-blue-400 cursor-pointer">
-                Stats
-              </div>
-              <div className="hover:text-l hover:text-blue-400 cursor-pointer">
-                Wear
-              </div>
+              <DetailsNavBar />
             </div>
-            <div className="h-20 flex justify-evenly "></div>
+            {/* <div className="h-20 flex justify-evenly "></div> */}
             <div className="h-3/5 p-10 m-8">
               <div className=" text-3xl capitalize font-semibold text-gray-500 m-8">
                 <span className=" text-black">Growth Rate:&nbsp;</span>

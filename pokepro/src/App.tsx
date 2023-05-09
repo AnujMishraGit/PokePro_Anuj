@@ -6,6 +6,7 @@ import Loader from "./components/Loader/Loader";
 import Header from "./components/Header/Header";
 import InputBar from "./components/InputBar/InputBar.js";
 import "./App.css";
+import Form from "./components/DetailsNavBar/Forms/Form.js";
 const Search = lazy(() => import("./Pages/Search/Search"));
 const Pokemon = lazy(() => import("./Pages/Pokemon/Pokemon"));
 function App() {
@@ -16,14 +17,16 @@ function App() {
       </div>
 
       <Header />
-
       <BrowserRouter>
         <Suspense fallback={<Loader />}>
           <div className="app flex flex-wrap z-10 justify-center align-middle">
-            <InputBar />
+            {/* <InputBar /> */}
             <Routes>
               <Route element={<Search />} path="/" />
-              <Route element={<Pokemon />} path="/pokemon/:id" />
+              <Route element={<Pokemon />} path="/pokemon/:id">
+                
+
+              </Route>
             </Routes>
           </div>
         </Suspense>
