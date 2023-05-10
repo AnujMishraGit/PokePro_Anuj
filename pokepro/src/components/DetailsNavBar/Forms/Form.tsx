@@ -20,36 +20,16 @@ function fetchSprites(sprites: Sprite): JSX.Element[] {
   return images;
 }
 
-// const  Form = () => {
-//   const location = useLocation();
-//   const pokemonID:number = parseInt(location.pathname.split("/")[2]);
-//   console.log("this is the location");
-//   useEffect( () => {
-//     console.log(typeof(location.pathname.split("/")[2]));
-//     axios.get(`${pokemonFormsUrl}${pokemonID}`).then((response) => {fetchSprites(response.data.sprites) })
-//     // console.log(response);
-//   }, []);
-//   return <div>Form</div>;
-// }
-
-// export default Form;
-
-const Form = () => {
+const Form:React.FC = () => {
   const location = useLocation();
   const pokemonID: number = parseInt(location.pathname.split("/")[2]);
   const [sprites, setSprites] = useState<Sprite>({});
 
   useEffect(() => {
     axios
-      .get(`${pokemonFormsUrl}${pokemonID}`)
-      .then((response) => {
-        setSprites(response.data.sprites);
-        console.log(response)
-        fetchSprites(response.data.sprites);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      .get(`https://pokeapi.co/api/v2/evolution-chain/${pokemonID}`)
+      .then((response) => axios.get(response.data.chain.species.url))
+      .then((response) => console.log(response.data));
   }, [pokemonID]);
 
   return (

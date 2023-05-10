@@ -7,17 +7,17 @@ import Types from "./Types/Types";
 import Details from "./Details/Details";
 import Stats from "./Stats/Stats";
 import Wear from "./Wear/Wear";
-import Wrapper from "../Wrapper/Wrapper";
 
-const Constants = {
-  FORMS: "forms",
-  DETAILS: "details",
-  TYPES: "types",
-  STATS: "stats",
-  WEAR: "wear",
+
+enum Constants {
+  FORMS = "forms",
+  DETAILS = "details",
+  TYPES = "types",
+  STATS = "stats",
+  WEAR = "wear",
 };
 
-function DetailsNavBar() {
+const  DetailsNavBar:React.FC = () => {
   const location = useLocation();
   const pokemonId = location.pathname.slice(-2);
   const { currentPokemon } = useAppSelector(({ pokemon }) => pokemon);
