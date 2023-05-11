@@ -1,8 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { BsSearch } from "react-icons/bs";
-import { BiHomeHeart } from "react-icons/bi";
-import { Link } from "react-router-dom";
+
 import { pokemonSpeciesRoute } from "../../utils/baseUrl";
 import { debounce } from "lodash";
 import axios from "axios";
@@ -12,7 +10,10 @@ const InputBar: React.FC = () => {
     const response = await axios.get(`${pokemonSpeciesRoute}/${name}`);
 
     if (response.status === 200) {
+      const { data } = response;
+      console.log(data);
       let ID = response.data.id;
+
       navigate(`/pokemon/${ID}`);
     }
   }

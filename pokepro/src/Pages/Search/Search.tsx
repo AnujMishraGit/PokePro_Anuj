@@ -6,10 +6,10 @@ import { getInitialPokemonData } from "../../app/getInitialData";
 import { getPokemonsData } from "../../app/getPokemonData";
 import InputBar from "../../components/InputBar/InputBar";
 
-const Search:React.FC = () => {
+const Search: React.FC = () => {
   const dispatch = useAppDispatch();
   // data fetching from api and storing it to the store
-   
+
   const { allPokemon, randomPokemon } = useAppSelector(
     ({ pokemon }) => pokemon
   );
@@ -27,9 +27,9 @@ const Search:React.FC = () => {
   }, [allPokemon, dispatch]);
 
   return (
-    <div className=" flex flex-wrap">
+    <div className=" flex flex-wrap ">
       <InputBar />
-      <div className=" flex flex-wrap">
+      <div className=" flex flex-wrap justify-center align-middle ">
         {randomPokemon?.map((pokemon, idx) => (
           <PokemonCard
             name={pokemon.name}

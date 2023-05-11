@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { PokiType } from "../../utils/Types";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-// import "react-lazy-load-image-component/src/effects/blur.css";
+
 
 type cardProps = {
   id: number;
@@ -9,7 +9,7 @@ type cardProps = {
   imgURL: string;
   baseColor?: string;
   ability?: string;
-  type: PokiType;
+  type?: PokiType;
 };
 
 function PokemonCard({
@@ -34,10 +34,10 @@ function PokemonCard({
   return (
     <div
       onClick={() => handleCardClick(id)}
-      className="w-1/6  bg-slate-200 m-6 p-4 rounded-sm flex flex-col items-center h-1/3 justify-evenly "
+      className="bg-slate-200 m-6  rounded-sm flex flex-col items-center justify-evenly w-full sm:w-5/12  md:w-fit lg:w-3/12 h-1/3 min-w-fit min-h-fit"
     >
       <div
-        className="object-contain items-center rounded-md backdrop:blur-sm w-3/4 justify-center flex h-3/4"
+        className="object-contain items-center rounded-md backdrop:blur-sm w-3/4 h-3/4 justify-center flex min-w-fit min-h-fit"
         style={{ backgroundColor: baseColor }}
       >
         <LazyLoadImage
@@ -47,17 +47,16 @@ function PokemonCard({
           placeholderSrc="../../assets/assets/pokeball.png"
         />
       </div>
-      <div className=" flex  align-top justify-around w-full flex-col text-center">
-        <div className=" text-2xl text-black  flex justify-evenly align-text-bottom">
-          <h2 className=" text-sm text-gray-400">{`n ${id
+      <div className=" flex flex-col justify-center item-center w-full flex-wrap">
+        <div className=" text-2xl text-black  flex items-center justify-around">
+          <h2 className=" text-sm text-gray-400">{`# ${id
             .toString()
             .padStart(3, "0")}`}</h2>
           <h3 className="font-bold capitalize  text-purple-800">{name}</h3>
         </div>
-        <div>
-          <h4 className=" text-blue-400 capitalize flex justify-end pr-10">
-            {types}
-          </h4>
+        <div className="flex justify-around">
+          <p className=" text-lg text-black">TYPE</p>
+          <h4 className=" text-blue-400 capitalize flex">{` ${types}`}</h4>
         </div>
       </div>
     </div>
