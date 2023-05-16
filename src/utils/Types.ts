@@ -2,6 +2,8 @@ export interface PokemonTypeInitialState {
     allPokemon: undefined | PokemonType[];
     randomPokemon: undefined | allPokemonDataType[];
     currentPokemon: undefined | individualPokemonDataType[];
+    offset:number;
+    limit:number;
 };
 
 export interface PokemonType {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { getComplementaryColor } from "../../../utils/typesColor";
 interface IPokemon {
   name: string;
   types: {
@@ -54,6 +55,7 @@ const Types: React.FC = () => {
                 className={`px-2 py-1 bg-${
                   type.type.name
                 }-400 text-white rounded-md mr-2`}
+                style={{backgroundColor : getComplementaryColor(type.type.name)}}
               >
                 {type.type.name}
               </div>

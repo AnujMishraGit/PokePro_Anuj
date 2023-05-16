@@ -7,7 +7,7 @@ const Evolution: React.FC = () => {
   const location = useLocation();
   const pokemonID: number = parseInt(location.pathname.split("/")[2]);
   const [evolutionID, setEvolutionID] = useState<number | null>(null);
-console.log("hi i am evolution section", pokemonID);
+
   useEffect(() => {
     //@ts-ignore
     async function getEvolutionID(pokemonID: number) {
@@ -15,7 +15,7 @@ console.log("hi i am evolution section", pokemonID);
         .get(`${pokemonSpeciesRoute}/${pokemonID}`);
 
       if (data) {
-        console.log(data.evolution_chain.url.split("/").slice(-2, -1)[0])
+       
         setEvolutionID(data.evolution_chain.url.split("/").slice(-2, -1)[0]);
       }
     }

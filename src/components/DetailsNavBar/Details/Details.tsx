@@ -1,7 +1,8 @@
 //@ts-nocheck
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {  useLocation } from 'react-router-dom'
+import { useLocation } from "react-router-dom";
+import { getComplementaryColor } from "../../../utils/typesColor";
 
 interface PokemonDetails {
   name: string;
@@ -63,7 +64,15 @@ const Details: React.FC = () => {
           <h3 className="text-lg font-semibold mb-2">Types</h3>
           <ul>
             {pokemonDetails?.types.map((type) => (
-              <li key={type.type.name}>{type.type.name}</li>
+              <li
+                key={type.type.name}
+                style={{
+                  color: getComplementaryColor(type.type.name),
+                }}
+                className=" text-white"
+              >
+                {type.type.name}
+              </li>
             ))}
           </ul>
         </div>
@@ -73,4 +82,3 @@ const Details: React.FC = () => {
 };
 
 export default Details;
-

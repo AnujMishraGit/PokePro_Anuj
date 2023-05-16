@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { getCurrentPokemonData } from "../../app/getCurrentPokemonData";
 import axios from "axios";
 import DetailsNavBar from "../../components/DetailsNavBar/DetailsNavBar";
+import { getComplementaryColor } from "../../utils/typesColor";
 
 const PokemonDetailsPage: React.FC = () => {
   const params = useParams();
@@ -58,7 +59,8 @@ const PokemonDetailsPage: React.FC = () => {
                   {currentPokemon.type.map((item, idx) => (
                     <div
                       key={`pokemon-${idx}`}
-                      className="bg-green-200 capitalize rounded-md pl-4 pr-4 mr-2 mb-2"
+                      style={{backgroundColor : getComplementaryColor(item)}}
+                      className=" capitalize rounded-md pl-4 pr-4 mr-2 mb-2"
                     >
                       {item}
                     </div>
@@ -80,7 +82,7 @@ const PokemonDetailsPage: React.FC = () => {
             </div>
           </div>
           <div className="w-full md:w-1/2 h-full bg-slate-200 flex flex-col justify-items-center">
-            <div className="h-1/5 flex justify-around items-center font-bold text-center m-10 text-gray-400">
+            <div className="h-1/5 flex justify-around items-center font-bold text-center m-10  text-gray-400">
               <DetailsNavBar />
             </div>
             <div className="h-full p-10 m-8 flex flex-col justify-center">

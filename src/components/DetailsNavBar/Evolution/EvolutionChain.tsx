@@ -1,13 +1,15 @@
 //@ts-nocheck
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { pokemonEvolutionChain, pokemonRoute } from "../../../utils/baseUrl";
-
+import { useAppSelector } from "../../../app/hook";
 
 const EvolutionChain = ({ evolutionId }) => {
   const [evolutionChain, setEvolutionChain] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const { currentPokemon } = useAppSelector(({ pokemon }) => pokemon);
 
   useEffect(() => {
     const fetchEvolutionChain = async () => {
@@ -43,9 +45,14 @@ const EvolutionChain = ({ evolutionId }) => {
   }
 
   return (
-    <div className="flex object-fill w-full h-full overflow-auto justify-center">
+    <div className="flex object-fill w-full h-full overflow-auto justify-evenly">
       {evolutionChain.map((imageUrl, index) => (
-        <LazyLoadImage key={index} src={imageUrl} alt={`Pokemon ${index}`} />
+        <LazyLoadImage
+          key={index}
+          src={imageUrl}
+          alt={`Pokemon ${index}`}
+          style={{ backgroundColor: currentPokemon.baseColor }}
+        />
       ))}
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useLocation, Link } from "react-router-dom";
 
 import Evolution from "./Evolution/Evolution";
@@ -21,13 +21,20 @@ const DetailsNavBar: React.FC = () => {
   return (
     <div className="w-full">
       <ul className="flex text-lg font-semibold w-full justify-between">
-        {Object.values(Constants).map((item, idx) => (
-          <li key={idx} className="cursor-pointer hover:text-purple-600">
-            <Link to={`?nav=${item}`}>{item}</Link>
-          </li>
-        ))}
+        {Object.values(Constants).map((item, idx) => {
+          const isActive = location.search.includes(`nav=${item}`);
+
+          return (
+            <li
+              key={idx}
+              className={`cursor-pointer ${isActive ? "text-purple-600" : ""}`}
+            >
+              <Link to={`?nav=${item}`}>{item}</Link>
+            </li>
+          );
+        })}
       </ul>
-      <div className="  w-full h-40 ">
+      <div className="  w-full h-40 mt-10">
         {detailLocation === Constants.EVOLUTION && <Evolution />}
         {detailLocation === Constants.DETAILS && <Details />}
         {detailLocation === Constants.STATS && <PokemonStats />}
