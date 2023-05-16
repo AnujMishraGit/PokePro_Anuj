@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { PokiType } from "../../utils/Types";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { getComplementaryColor } from "../../utils/typesColor";
+import { getComplementaryColor } from "../../utils/typesColors";
 type cardProps = {
   id: number;
   name: string;

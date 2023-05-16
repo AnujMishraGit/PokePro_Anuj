@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { getComplementaryColor } from "../../../utils/typesColor";
+import { getComplementaryColor } from "../../../utils/typesColors";
 
 interface PokemonDetails {
   name: string;
