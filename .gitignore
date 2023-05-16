@@ -21,7 +21,7 @@ out/
 
 # TypeScript specific files
 *.tsbuildinfo
-*.ts
+
 
 # React specific files
 yarn-error.log
