@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component"; //new LazyLoadImage
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import "./search.css";
+import { useNavigate } from "react-router-dom";
 import PokemonCard from "../../components/Card/PokemonCard";
 import { getInitialPokemonData } from "../../app/getInitialData";
 import { getPokemonsData } from "../../app/getPokemonData";
@@ -10,8 +11,6 @@ import InputBar from "../../components/InputBar/InputBar";
 import Loader from "../../components/Loader/Loader";
 import { increaseOffset } from "../../app/pokemonListSlice";
 const Search: React.FC = () => {
-  // const offsetRef = useRef<number>(0);//redux the offset
-  // const limitRef = useRef<number>(20);// redux the limit
   const targetRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const [scrollPosition, setScrollPosition] = useState("");
@@ -57,25 +56,36 @@ const Search: React.FC = () => {
   }, [allPokemon, dispatch]);
   /// __________________auto scroll to the last scroll position ____________________________________//
   const scrollableRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
-  const handleScroll = () => {
-    console.log("handlescroll is called ");
+  const saveScrollPosition = () => {
     if (scrollableRef.current) {
-      const { scrollTop, scrollLeft } = scrollableRef.current;
-      console.log("Scroll Top:", scrollTop);
-      console.log("Scroll Left:", scrollLeft);
+      const { scrollTop } = scrollableRef.current;
+      window.history.replaceState(
+        { ...window.history.state, scrollPosition: scrollTop },
+        ""
+      );
     }
   };
 
-  useEffect(() => {
+  const restoreScrollPosition = () => {
     if (scrollableRef.current) {
-      scrollableRef.current.addEventListener("scroll", handleScroll);
+      const scrollPosition = window.history.state?.scrollPosition;
+      scrollableRef.current.scrollTo({ top: scrollPosition });
     }
+  };
+
+  const handleNavigate = (id: number) => {
+  
+    saveScrollPosition();
+    navigate(`/pokemon/${id}`);
+  };
+
+  useEffect(() => {
+    restoreScrollPosition();
 
     return () => {
-      if (scrollableRef.current) {
-        scrollableRef.current.removeEventListener("scroll", handleScroll);
-      }
+      saveScrollPosition();
     };
   }, []);
 
@@ -85,10 +95,9 @@ const Search: React.FC = () => {
     <div className=" flex flex-wrap ">
       <InputBar />
       <div
-        className=" flex flex-wrap justify-center align-middle overflow-auto no-scrollbar"
+        className=" flex flex-wrap justify-center align-middle overflow-auto"
         ref={scrollableRef}
         style={{ height: "100vh" }}
-        // onClick={recordScroll}
       >
         {randomPokemon?.map((pokemon, idx) => (
           <PokemonCard
@@ -97,7 +106,8 @@ const Search: React.FC = () => {
             type={pokemon.type}
             id={pokemon.id}
             baseColor={pokemon.baseColor}
-            key={idx}
+            key={idx} // make it unique ex pokemon.id
+            onClick={handleNavigate}
           />
         ))}
         <div ref={targetRef}>loading.....</div>
