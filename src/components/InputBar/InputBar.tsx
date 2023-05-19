@@ -11,7 +11,6 @@ const InputBar: React.FC = () => {
 
     if (response.status === 200) {
       const { data } = response;
-      console.log(data);
       let ID = response.data.id;
 
       navigate(`/pokemon/${ID}`);

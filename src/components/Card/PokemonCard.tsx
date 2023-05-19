@@ -19,10 +19,7 @@ const PokemonCard: React.FC<cardProps> = ({
   type,
   onClick,
 }) => {
-  let types: string = "";
-  if (type && type.type) {
-    types = type.type.name;
-  }
+  const types = type?.type?.name || "";
 
   return (
     <div
@@ -43,7 +40,7 @@ const PokemonCard: React.FC<cardProps> = ({
       <div className=" flex flex-col justify-center item-center w-full flex-wrap">
         <div className=" text-2xl text-black  flex items-center justify-around">
           <h2 className=" text-sm text-gray-400">{`# ${id
-            .toString()
+            ?.toString()
             .padStart(3, "0")}`}</h2>
           <h3 className="font-bold capitalize  text-purple-800">{name}</h3>
         </div>

@@ -12,40 +12,33 @@ const Search: React.FC = () => {
   const targetRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
 
-  const { allPokemon, randomPokemon, offset, limit } = useAppSelector(
+  const { allPokemon, offset, limit } = useAppSelector(
     ({ pokemon }) => pokemon
   );
 
-  const previousOffsetRef = useRef<number>(offset);
-  useEffect(() => {
-    previousOffsetRef.current = offset;
-  }, [offset]);
-
-  //  intersection observer for loading more data
-  let observer: IntersectionObserver | null;
+  const makePokemonDetailsAPICall = async () => {
+    const pokemons = await dispatch(PokemonListingActions({ offset, limit }));
+    dispatch(getPokemonsData(pokemons.payload));
+  };
 
   useEffect(() => {
-    observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        dispatch(
-          PokemonListingActions({ offset: previousOffsetRef.current, limit })
-        );
-      }
-    });
+    let observer: IntersectionObserver;
+
+    if (targetRef.current) {
+      observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          makePokemonDetailsAPICall();
+        }
+      });
+      observer.observe(targetRef.current);
+    }
 
     return () => {
       if (observer) {
         observer.disconnect();
       }
     };
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (targetRef.current && observer) {
-      observer.observe(targetRef.current);
-    }
-    dispatch(getPokemonsData(allPokemon));
-  }, [allPokemon, dispatch, targetRef]);
+  }, [offset, targetRef.current]);
 
   /// __________________auto scroll to the last scroll position ____________________________________//
   const scrollableRef = useRef<HTMLDivElement>(null);
@@ -75,23 +68,19 @@ const Search: React.FC = () => {
 
   useEffect(() => {
     restoreScrollPosition();
-
-    return () => {
-      saveScrollPosition();
-    };
   }, []);
 
   /// ________________________________________________//
 
   return (
-    <div className=" flex flex-col">
+    <div className="flex flex-col">
       <InputBar />
       <div
         className=" flex flex-wrap justify-center align-middle overflow-auto"
         ref={scrollableRef}
         style={{ height: "100vh" }}
       >
-        {randomPokemon?.map((pokemon) => (
+        {allPokemon?.map((pokemon: PokemonType) => (
           <PokemonCard
             name={pokemon.name}
             imgURL={pokemon.image}
