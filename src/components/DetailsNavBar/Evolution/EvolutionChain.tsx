@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { pokemonEvolutionChain, pokemonRoute } from "../../../utils/baseUrl";
-import { useAppSelector } from "../../../app/hook";
+import { useAppSelector } from "../../../redux/hook";
 
 const EvolutionChain = ({ evolutionId }) => {
   const [evolutionChain, setEvolutionChain] = useState([]);

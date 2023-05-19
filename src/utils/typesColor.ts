@@ -20,11 +20,8 @@ export function getComplementaryColor(type: string): string {
         fairy: "rgba(238, 153, 172, 1)",
         unknown: "rgba(192, 192, 192, 1)",
     };
-    const complementaryColor = colors[type.toLowerCase()];
-    if (complementaryColor) {
-        return complementaryColor;
-    } else {
-        // If the type is not found, return a default color
-        return "rgba(0, 0, 0, 1)";
-    }
+    const complementaryColor = colors[type.toLowerCase()] ?? "rgba(0, 0, 0, 1)"
+
+    return complementaryColor;
+
 }

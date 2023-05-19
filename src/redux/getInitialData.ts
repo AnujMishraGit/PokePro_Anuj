@@ -2,7 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { pokemonRoute } from "../utils/baseUrl";
 
-export const getInitialPokemonData = createAsyncThunk("pokemon/initialData", async (offset,limit) => {
+
+export const PokemonListingActions = createAsyncThunk("pokemon/initialData", async ({ offset, limit }: { offset: number, limit: number }) => {
     try {
         const { data } = await axios.get(`${pokemonRoute}/?limit=${limit}&offset=${offset}`);
 

@@ -17,7 +17,7 @@ function App() {
       <Background />
       <BrowserRouter>
         <Suspense fallback={<Loader />}>
-          <div className="flex flex-wrap z-10 justify-center object-fill min-w-min overflow-scroll backdrop-opacity-60  h-screen w-5/6 bg-white align-middle   bg-white/30 no-scrollbar">
+          <div className="flex flex-wrap z-10 justify-center object-fill min-w-min overflow-scroll backdrop-opacity-60  h-screen w-5/6 bg-white align-middle   bg-white/30 no-scrollbar" style={{backdropFilter: 'blur(5px)'}}>
             <Routes>
               <Route element={<Search />} path="/" />
               <Route element={<Pokemon />} path="/pokemon/:id"></Route>

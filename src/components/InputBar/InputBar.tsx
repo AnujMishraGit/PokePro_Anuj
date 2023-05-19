@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { pokemonSpeciesRoute } from "../../utils/baseUrl";
@@ -23,12 +23,12 @@ const InputBar: React.FC = () => {
     debouncedSearch(e.target.value);
   }
   return (
-    <div className=" flex  align-middle text-justify justify-around w-full">
+    <div className="flex items-center justify-center w-full">
       <input
-        placeholder="Don't search "
+        placeholder="Search pokemon here .."
         type="search"
         onChange={handleChange}
-        className=" p-5 m-2 h-5 w-60 text-black font-weight-bold"
+        className="p-3 m-2 h-10 w-60 sm:w-80 md:w-96 text-gray-800 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
     </div>
   );

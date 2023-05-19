@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { PokiType } from "../../utils/Types";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { getComplementaryColor } from "../../utils/typesColor";
@@ -8,33 +7,27 @@ type cardProps = {
   imgURL: string;
   baseColor?: string;
   ability?: string;
-  type?: PokiType;
+  type: PokiType;
+  onClick: (id: number) => void;
 };
 
-function PokemonCard({
+const PokemonCard: React.FC<cardProps> = ({
   id,
   name,
   imgURL,
-
-  ability,
   baseColor,
   type,
-}: cardProps) {
-  // @ts-ignore
-  let types: string = type[0].type.name;
-  const navigate = useNavigate();
-
-  const handleCardClick = (id: number) => {
-    console.log("Navigating to /pokemon/" + id);
-
-    navigate(`/pokemon/${id}`);
-  };
+  onClick,
+}) => {
+  let types: string = "";
+  if (type && type.type) {
+    types = type.type.name;
+  }
 
   return (
     <div
-      onClick={() => handleCardClick(id)}
+      onClick={() => onClick(id)}
       className="bg-slate-200 m-6 rounded-sm flex flex-col items-center justify-evenly w-full sm:w-5/12 md:w-fit lg:w-3/12 h-1/3 min-w-fit min-h-fit w-64 h-96"
-      // style={{ flex: "1 0 calc(50% - 1rem)" }}
     >
       <div
         className="object-contain items-center rounded-md backdrop:blur-sm w-3/4 h-3/4 justify-center flex min-w-fit min-h-fit"
@@ -64,6 +57,6 @@ function PokemonCard({
       </div>
     </div>
   );
-}
+};
 
 export default PokemonCard;

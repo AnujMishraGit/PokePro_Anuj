@@ -1,11 +1,10 @@
-// @ts-nocheck
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import React, { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hook";
-import { getCurrentPokemonData } from "../../app/getCurrentPokemonData";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { getCurrentPokemonData } from "../../redux/getCurrentPokemonData";
 import axios from "axios";
 import DetailsNavBar from "../../components/DetailsNavBar/DetailsNavBar";
 import { getComplementaryColor } from "../../utils/typesColor";
@@ -23,7 +22,7 @@ const PokemonDetailsPage: React.FC = () => {
   useEffect(() => {
     if (currentPokemon?.id) {
       axios
-        .get(`https://pokeapi.co/api/v2/ability/${currentPokemon.id}`)
+        .get(`https://pokeapi.co/api/v2/ability/${currentPokemon.id}`)// fix this 
         .then((res) => {
           setPokemonFormsData({
             flavor_text: res.data?.flavor_text_entries[3]?.flavor_text,
@@ -38,7 +37,6 @@ const PokemonDetailsPage: React.FC = () => {
     };
   }, [currentPokemon?.id]);
 
-  // console.log(currentPokemon?.baseColor);
 
   return (
     <div className="w-full h-full">
@@ -59,7 +57,7 @@ const PokemonDetailsPage: React.FC = () => {
                   {currentPokemon.type.map((item, idx) => (
                     <div
                       key={`pokemon-${idx}`}
-                      style={{backgroundColor : getComplementaryColor(item)}}
+                      style={{ backgroundColor: getComplementaryColor(item) }}
                       className=" capitalize rounded-md pl-4 pr-4 mr-2 mb-2"
                     >
                       {item}

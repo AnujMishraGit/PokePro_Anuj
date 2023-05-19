@@ -1,9 +1,9 @@
 export interface PokemonTypeInitialState {
-    allPokemon: undefined | PokemonType[];
-    randomPokemon: undefined | allPokemonDataType[];
-    currentPokemon: undefined | individualPokemonDataType[];
-    offset:number;
-    limit:number;
+    allPokemon: PokemonType[];
+    randomPokemon: allPokemonDataType[];
+    currentPokemon: undefined | individualPokemonDataType;
+    offset: number;
+    limit: number;
 };
 
 export interface PokemonType {
@@ -12,7 +12,7 @@ export interface PokemonType {
 }
 
 export interface PokiType {
-    slot: number;
+
     type: {
         name: string;
         url: string;
@@ -23,7 +23,7 @@ export interface allPokemonDataType {
     name: string;
     id: number;
     image: string;
-    type: PokiType;
+    type: PokiType[];
     baseColor: string;
 }
 export interface individualPokemonDataType {
