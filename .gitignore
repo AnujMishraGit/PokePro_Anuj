@@ -10,7 +10,7 @@ out/
 .idea/
 
 # Logs and databases
-*.log
+
 *.sqlite
 
 # Environment variables

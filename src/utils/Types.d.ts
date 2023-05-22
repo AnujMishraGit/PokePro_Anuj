@@ -15,6 +15,7 @@ interface PokemonType {
 }
 
 interface PokiType {
+  slot:number;
   type: {
     name: string;
     url: string;

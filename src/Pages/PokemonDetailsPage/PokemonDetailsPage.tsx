@@ -7,7 +7,11 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { getCurrentPokemonData } from "../../redux/getCurrentPokemonData";
 import axios from "axios";
 import DetailsNavBar from "../../components/DetailsNavBar/DetailsNavBar";
-import { getComplementaryColor } from "../../utils/typesColor";
+import {
+  getComplementaryColor,
+  getHabitatColor,
+  growth_rate_color,
+} from "../../utils/typesColor";
 
 const PokemonDetailsPage: React.FC = () => {
   const params = useParams();
@@ -22,7 +26,7 @@ const PokemonDetailsPage: React.FC = () => {
   useEffect(() => {
     if (currentPokemon?.id) {
       axios
-        .get(`https://pokeapi.co/api/v2/ability/${currentPokemon.id}`)// fix this 
+        .get(`https://pokeapi.co/api/v2/ability/${currentPokemon.id}`) // fix this
         .then((res) => {
           setPokemonFormsData({
             flavor_text: res.data?.flavor_text_entries[3]?.flavor_text,
@@ -36,7 +40,6 @@ const PokemonDetailsPage: React.FC = () => {
       });
     };
   }, [currentPokemon?.id]);
-
 
   return (
     <div className="w-full h-full">
@@ -54,7 +57,7 @@ const PokemonDetailsPage: React.FC = () => {
               </div>
               <div className="w-1/2 h-full flex flex-col pl-6 pt-6 justify-between">
                 <div className="flex flex-wrap">
-                  {currentPokemon.type.map((item, idx) => (
+                  {currentPokemon.type.map((item: string, idx: number) => (
                     <div
                       key={`pokemon-${idx}`}
                       style={{ backgroundColor: getComplementaryColor(item) }}
@@ -80,15 +83,21 @@ const PokemonDetailsPage: React.FC = () => {
             </div>
           </div>
           <div className="w-full md:w-1/2 h-full bg-slate-200 flex flex-col justify-items-center">
-            <div className="h-1/5 flex justify-around items-center font-bold text-center m-10  text-gray-400">
+            <div className="h-1/5 flex justify-around items-center font-bold text-center m-12  text-gray-400">
               <DetailsNavBar />
             </div>
             <div className="h-full p-10 m-8 flex flex-col justify-center">
-              <div className="text-3xl capitalize font-semibold text-gray-500 mb-6">
+              <div
+                className="text-3xl capitalize font-semibold  mb-6"
+                style={{ color: growth_rate_color(currentPokemon.growth_rate) }}
+              >
                 <span className="text-black">Growth Rate:&nbsp;</span>
                 {currentPokemon.growth_rate}
               </div>
-              <div className="text-2xl capitalize font-semibold text-gray-500 mb-6">
+              <div
+                className="text-2xl capitalize font-semibold mb-6"
+                style={{ color: getHabitatColor(currentPokemon.habitat) }}
+              >
                 <span className="text-black">Habitat: &nbsp;</span>
                 {currentPokemon.habitat}
               </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import pokeballLoader from "../../assets/assets/pokeball-loader.gif";
+import pokeballLoader from "../../assets/pokeball-loader.gif";
 const Loader: React.FC = () => (
   <div className="loader">
     <img src={pokeballLoader} alt="" />

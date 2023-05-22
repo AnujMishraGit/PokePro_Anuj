@@ -1,4 +1,4 @@
-import pokeball2 from "../../assets/assets/pokeball2.png";
+
 import background from "../../assets/background.jpg";
 
 function Background() {

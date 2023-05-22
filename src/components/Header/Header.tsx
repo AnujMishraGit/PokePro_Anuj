@@ -1,12 +1,10 @@
 import React from "react";
+import logo from "../../assets/logo.png";
 
-import "./header.css";
 const Header: React.FC = () => {
   return (
-    <header className=" z-10 ">
-      
-      <div className="header__title">Pokepro</div>
-      
+    <header>
+      <img src={logo} alt="logo" className=" z-50 bg-black w-10 h-12" />
     </header>
   );
 };

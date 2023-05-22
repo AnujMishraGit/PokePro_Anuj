@@ -19,12 +19,12 @@ const PokemonCard: React.FC<cardProps> = ({
   type,
   onClick,
 }) => {
-  const types = type?.type?.name || "";
+  const types = type?.[0].type?.name || "";
 
   return (
     <div
       onClick={() => onClick(id)}
-      className="bg-slate-200 m-6 rounded-sm flex flex-col items-center justify-evenly w-full sm:w-5/12 md:w-fit lg:w-3/12 h-1/3 min-w-fit min-h-fit w-64 h-96"
+      className="bg-slate-200 m-6 rounded-sm flex flex-col items-center justify-evenly  sm:w-5/12 md:w-fit lg:w-3/12  min-w-fit min-h-fit w-64 h-96"
     >
       <div
         className="object-contain items-center rounded-md backdrop:blur-sm w-3/4 h-3/4 justify-center flex min-w-fit min-h-fit"

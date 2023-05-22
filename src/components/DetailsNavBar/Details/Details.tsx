@@ -60,22 +60,7 @@ const Details: React.FC = () => {
             ))}
           </ul>
         </div>
-        <div className="bg-white rounded-md shadow-md p-4">
-          <h3 className="text-lg font-semibold mb-2">Types</h3>
-          <ul>
-            {pokemonDetails?.types.map((type) => (
-              <li
-                key={type.type.name}
-                style={{
-                  color: getComplementaryColor(type.type.name),
-                }}
-                className=" text-white"
-              >
-                {type.type.name}
-              </li>
-            ))}
-          </ul>
-        </div>
+        
       </div>
     </div>
   );

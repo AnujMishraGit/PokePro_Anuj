@@ -34,7 +34,7 @@ const DetailsNavBar: React.FC = () => {
           );
         })}
       </ul>
-      <div className="  w-full h-40 mt-10">
+      <div className="  w-full h-40 mt-4">
         {detailLocation === Constants.EVOLUTION && <Evolution />}
         {detailLocation === Constants.DETAILS && <Details />}
         {detailLocation === Constants.STATS && <PokemonStats />}
