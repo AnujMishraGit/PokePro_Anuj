@@ -52,9 +52,7 @@ const Types: React.FC = () => {
             {pokemon.types.map((type, index) => (
               <div
                 key={index}
-                className={`px-2 py-1 bg-${
-                  type.type.name
-                }-400 text-white rounded-md mr-2`}
+                className={`px-2 py-1 text-white rounded-md mr-2`}
                 style={{backgroundColor : getComplementaryColor(type.type.name)}}
               >
                 {type.type.name}

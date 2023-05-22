@@ -1,15 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import {
-  PokemonType,
-  allPokemonDataType,
-  individualPokemonDataType,
-  PokiType,
-} from "../utils/Types";
+
 import { colorConverter } from "../utils/convertBaseColor";
 import { pokemonRoute } from "../utils/baseUrl";
 
-// to be placed in utils.js
+
 function getTypeNames(types: PokiType[]): string[] {
   return types.map((type) => type.type.name);
 }

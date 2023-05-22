@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Background from "./components/Background/Background";
 import { Suspense, lazy } from "react";
 import Loader from "./components/Loader/Loader";
-import Header from "./components/Header/Header";
 import "./App.css";
 
 const Search = lazy(() => import("./Pages/Search/Search"));
@@ -13,10 +12,7 @@ function App() {
   return (
     <div className="relative flex flex-col justify-center items-center w-screen h-screen object-fill ">
       <Background />
-      <img
-        src="../src/assets/logo.png"
-        className=" z-20  h-20 w-48"
-      />
+      <img src="../src/assets/logo.png" className=" z-20  h-20 w-48" />
       <BrowserRouter>
         <Suspense fallback={<Loader />}>
           <div

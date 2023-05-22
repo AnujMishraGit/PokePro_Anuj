@@ -1,8 +1,6 @@
-//@ts-nocheck
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { getComplementaryColor } from "../../../utils/typesColor";
 
 interface PokemonDetails {
   name: string;
@@ -18,10 +16,6 @@ interface PokemonDetails {
       name: string;
     };
   }[];
-}
-
-interface Props {
-  pokemonID: number;
 }
 
 const Details: React.FC = () => {
@@ -47,10 +41,12 @@ const Details: React.FC = () => {
       <div className="grid grid-cols-2 gap-2">
         <div className="bg-white rounded-md shadow-md p-4">
           <h3 className="text-lg font-semibold mb-2">Physical Attributes</h3>
-          <p>
-            Height: {pokemonDetails?.height / 10}m <br />
-            Weight: {pokemonDetails?.weight / 10}kg
-          </p>
+          {pokemonDetails && (
+            <p>
+              Height: {pokemonDetails.height / 10}m <br />
+              Weight: {pokemonDetails.weight / 10}kg
+            </p>
+          )}
         </div>
         <div className="bg-white rounded-md shadow-md p-4">
           <h3 className="text-lg font-semibold mb-2">Abilities</h3>
@@ -60,7 +56,6 @@ const Details: React.FC = () => {
             ))}
           </ul>
         </div>
-        
       </div>
     </div>
   );

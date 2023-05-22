@@ -1,4 +1,4 @@
-import { PokiType } from "../../utils/Types";
+
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { getComplementaryColor } from "../../utils/typesColor";
 type cardProps = {
@@ -7,7 +7,7 @@ type cardProps = {
   imgURL: string;
   baseColor?: string;
   ability?: string;
-  type: PokiType;
+  type: PokiType[];
   onClick: (id: number) => void;
 };
 
@@ -19,7 +19,7 @@ const PokemonCard: React.FC<cardProps> = ({
   type,
   onClick,
 }) => {
-  const types = type?.[0].type?.name || "";
+  const types = type?.[0]?.type?.name ?? "";
 
   return (
     <div

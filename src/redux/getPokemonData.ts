@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-// import { PokemonType } from "../utils/Types";
+
 import { colorConverter } from "../utils/convertBaseColor";
 export const getPokemonsData = createAsyncThunk(
   "pokemon/randomPokemon",
@@ -24,9 +24,12 @@ export const getPokemonsData = createAsyncThunk(
 
           if (pokemonColor && pokemonImage) {
             pokemonData[pokemonDetails.id] = {
+              id: pokemonDetails.id, // Add the id property
+              name: pokemonDetails.name, // Add the name property
+              url: pokemon.url, // Add the url property
               image: pokemonImage,
               baseColor: pokemonColor,
-              type: types as PokiType[], // this ia an array of objects {slot: number,types: {name:"string", url:"string"}}
+              type: types as PokiType[],
             };
           }
 

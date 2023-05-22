@@ -9,8 +9,8 @@ interface PokemonType {
   id: number;
   name: string;
   url: string;
-  image?: string;
-  type?: PokiType[];
+  image: string;
+  type: PokiType[];
   baseColor?: string;
 }
 
