@@ -76,9 +76,8 @@ const Search: React.FC = () => {
     <div className="flex flex-col">
       <InputBar />
       <div
-        className=" flex flex-wrap justify-center align-middle overflow-auto"
+        className="flex flex-wrap grow justify-center overflow-auto"
         ref={scrollableRef}
-        style={{ height: "100vh" }}
       >
         {allPokemon?.map((pokemon: PokemonType) => (
           <PokemonCard

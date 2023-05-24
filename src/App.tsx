@@ -16,7 +16,7 @@ function App() {
       <BrowserRouter>
         <Suspense fallback={<Loader />}>
           <div
-            className="flex flex-wrap z-10 justify-center object-fill min-w-min overflow-scroll backdrop-opacity-60  h-5/6 w-5/6 bg-white align-middle   bg-white/30 no-scrollbar border-2 border-purple-600"
+            className="flex z-10 justify-center object-fill min-w-min backdrop-opacity-60  h-5/6 w-5/6 bg-white align-middle   bg-white/30 no-scrollbar border-2 border-purple-600"
             style={{ backdropFilter: "blur(5px)" }}
           >
             <Routes>
