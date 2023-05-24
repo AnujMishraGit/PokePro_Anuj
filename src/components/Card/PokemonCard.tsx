@@ -1,43 +1,33 @@
-import { useNavigate } from "react-router-dom";
-import { PokiType } from "../../utils/Types";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-// import "react-lazy-load-image-component/src/effects/blur.css";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { getComplementaryColor } from "../../utils/typesColor";
 type cardProps = {
   id: number;
   name: string;
   imgURL: string;
   baseColor?: string;
   ability?: string;
-  type: PokiType;
+  type: PokiType[];
+  onClick: (id: number) => void;
 };
 
-function PokemonCard({
+const PokemonCard: React.FC<cardProps> = ({
   id,
   name,
   imgURL,
-
-  ability,
   baseColor,
   type,
-}: cardProps) {
-  // @ts-ignore
-  let types: string = type[0].type.name;
-  const navigate = useNavigate();
-
-  const handleCardClick = (id: number) => {
-    console.log("Navigating to /pokemon/" + id);
-
-    navigate(`/pokemon/${id}`);
-  };
+  onClick,
+}) => {
+  const types = type?.[0]?.type?.name ?? "";
 
   return (
     <div
-      onClick={() => handleCardClick(id)}
-      className="w-1/6  bg-slate-200 m-6 p-4 rounded-sm flex flex-col items-center h-1/3 justify-evenly "
+      onClick={() => onClick(id)}
+      className="bg-slate-200 m-6 rounded-sm flex flex-col items-center justify-evenly  sm:w-5/12 md:w-fit lg:w-3/12  min-w-fit min-h-fit w-64 h-96"
     >
       <div
-        className="object-contain items-center rounded-md backdrop:blur-sm w-3/4 justify-center flex h-3/4"
+        className="object-contain items-center rounded-md backdrop:blur-sm w-3/4 h-3/4 justify-center flex min-w-fit min-h-fit"
         style={{ backgroundColor: baseColor }}
       >
         <LazyLoadImage
@@ -47,21 +37,23 @@ function PokemonCard({
           placeholderSrc="../../assets/assets/pokeball.png"
         />
       </div>
-      <div className=" flex  align-top justify-around w-full flex-col text-center">
-        <div className=" text-2xl text-black  flex justify-evenly align-text-bottom">
-          <h2 className=" text-sm text-gray-400">{`n ${id
-            .toString()
+      <div className=" flex flex-col justify-center item-center w-full flex-wrap">
+        <div className=" text-2xl text-black  flex items-center justify-around">
+          <h2 className=" text-sm text-gray-400">{`# ${id
+            ?.toString()
             .padStart(3, "0")}`}</h2>
           <h3 className="font-bold capitalize  text-purple-800">{name}</h3>
         </div>
-        <div>
-          <h4 className=" text-blue-400 capitalize flex justify-end pr-10">
-            {types}
-          </h4>
+        <div className="flex justify-around">
+          <p className=" text-lg text-black">TYPE</p>
+          <h4
+            className="  capitalize flex"
+            style={{ color: getComplementaryColor(types) }}
+          >{` ${types}`}</h4>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default PokemonCard;

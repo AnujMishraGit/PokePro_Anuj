@@ -3,4 +3,5 @@ export const pokemonsRoute = `${pokemonAPI}/pokemon?limit=5000`;
 export const pokemonRoute = `${pokemonAPI}/pokemon`;
 export const pokemonSpeciesRoute = `${pokemonAPI}/pokemon-species`;
 export const pokeApiGithubContent = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon`
+export const pokemonEvolutionChain = `${pokemonAPI}/evolution-chain`
 export const pokemonFormsUrl = `${pokemonAPI}/pokemon-form/`
